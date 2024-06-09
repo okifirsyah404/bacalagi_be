@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id String @id @default(cuid())
+
+  googleId String @unique
+  email    String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User?
+}
+
+model Profile {
+  id String @id @default(cuid())
+
+  name              String
+  phoneNumber       String  @db.VarChar(15)
+  adminAreaLocality String
+  cityLocality      String
+  address           String?
+  avatarUrl         String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User?
+}
+
+model User {
+  id String @id @default(cuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accountId String? @unique
+  profileId String? @unique
+
+  account Account? @relation(fields: [accountId], references: [id])
+  profile Profile? @relation(fields: [profileId], references: [id])
+}
+
+// Add a new model to the schema
+// Don't forget to run `prisma migrate` after adding model!
+
+// model NewModel {}
+
+// Don't delete model and attribute below
+
+model FrequentlyAskedQuestion {
+  id String @id @default(uuid())
+
+  question String
+  answer   String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PrivacyPolicy {
+  id String @id @default(uuid())
+
+  title   String
+  content String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ProductStatus {
+  OPEN_FOR_SALE
+  SOLD_OUT
+  DISCONTINUED
+}

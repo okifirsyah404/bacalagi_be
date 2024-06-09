@@ -60,7 +60,7 @@ model User {
 // Don't delete model and attribute below
 
 model FrequentlyAskedQuestion {
-  id String @id @default(uuid())
+  id String @id @default(cuid())
 
   question String
   answer   String? @db.Text
@@ -70,7 +70,7 @@ model FrequentlyAskedQuestion {
 }
 
 model PrivacyPolicy {
-  id String @id @default(uuid())
+  id String @id @default(cuid())
 
   title   String
   content String? @db.Text

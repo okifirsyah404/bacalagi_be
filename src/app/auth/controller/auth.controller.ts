@@ -12,7 +12,7 @@ export class AuthController {
   async auth(@Body() dto: AuthenticateDto) {
     const data = await this.service.authenticate(dto);
 
-    return BaseResponse.ok({
+    return BaseResponse.created({
       data,
     });
   }
@@ -21,7 +21,7 @@ export class AuthController {
   async register(@Body() dto: RegisterDto) {
     const data = await this.service.register(dto);
 
-    return BaseResponse.ok({
+    return BaseResponse.created({
       data,
     });
   }

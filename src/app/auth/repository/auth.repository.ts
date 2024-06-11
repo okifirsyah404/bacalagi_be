@@ -70,6 +70,7 @@ export class AuthRepository {
       where: {
         email,
       },
+
       select: {
         ...DatabaseSelector.account,
         user: {

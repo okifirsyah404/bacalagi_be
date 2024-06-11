@@ -21,22 +21,26 @@ model Account {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User?
+
+  user User?
 }
 
 model Profile {
   id String @id @default(cuid())
 
   name              String
-  phoneNumber       String  @db.VarChar(15)
+  phoneNumber       String    @db.VarChar(15)
   adminAreaLocality String
   cityLocality      String
   address           String?
   avatarUrl         String?
+  dateOfBirth       DateTime?
+  age               Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User?
+
+  user User?
 }
 
 model User {
@@ -77,6 +81,13 @@ model PrivacyPolicy {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum BookRating {
+  ALL_AGE
+  CHILDREN
+  TEEN
+  ADULT
 }
 
 enum ProductStatus {

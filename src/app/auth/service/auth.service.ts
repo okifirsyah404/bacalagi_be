@@ -138,7 +138,6 @@ export class AuthService {
       const decodedToken = await this.firebaseAdmin
         .getAuth()
         .verifyIdToken(token);
-      this.logger.log(`Decoded Token: ${JSON.stringify(decodedToken)}`);
 
       return decodedToken;
     } catch (error) {

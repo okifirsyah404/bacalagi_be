@@ -1,21 +1,42 @@
 import { Transform } from 'class-transformer';
-import { IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsPhoneNumber,
+  IsString,
+} from 'class-validator';
 import { Transformer } from 'src/utils/transform/transformer';
 
 export default class AuthDto {
   constructor(
+    name: string,
     firebaseTokenId: string,
     phoneNumber: string,
     city: string,
     administrationArea: string,
-    address: string,
   ) {
+    this.name = name;
     this.firebaseTokenId = firebaseTokenId;
     this.phoneNumber = phoneNumber;
-    this.city = city;
-    this.administrationArea = administrationArea;
-    this.address = address;
+    this.regency = city;
+    this.province = administrationArea;
   }
+
+  /**
+   *
+   * Name field.
+   *
+   * @decorator `@IsNotEmpty()`
+   * @decorator `@IsString()`
+   *
+   */
+  @IsString({
+    message: 'name must be a string',
+  })
+  @IsNotEmpty({
+    message: 'name is required',
+  })
+  name: string;
 
   /**
    *
@@ -63,12 +84,12 @@ export default class AuthDto {
    *
    */
   @IsString({
-    message: 'city must be a string',
+    message: 'regency must be a string',
   })
   @IsNotEmpty({
-    message: 'city is required',
+    message: 'regency is required',
   })
-  city: string;
+  regency: string;
 
   /**
    *
@@ -84,7 +105,7 @@ export default class AuthDto {
   @IsNotEmpty({
     message: 'province is required',
   })
-  administrationArea: string;
+  province: string;
 
   /**
    *
@@ -97,8 +118,6 @@ export default class AuthDto {
   @IsString({
     message: 'address must be a string',
   })
-  @IsNotEmpty({
-    message: 'address is required',
-  })
-  address: string;
+  @IsOptional()
+  address?: string;
 }

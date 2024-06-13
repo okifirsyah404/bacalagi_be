@@ -87,10 +87,10 @@ export class AuthService {
     const createdUser = await this.repository.createUser({
       email: decodedToken.email,
       googleId: decodedToken.uid,
-      name: userFirebaseData.displayName,
-      cityLocality: dto.city,
+      name: dto.name,
+      cityLocality: dto.regency,
       phoneNumber: dto.phoneNumber,
-      adminAreaLocality: dto.administrationArea,
+      adminAreaLocality: dto.province,
       address: dto.address,
       avatarUrl: '',
     });

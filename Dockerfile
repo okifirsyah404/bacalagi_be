@@ -12,6 +12,8 @@ RUN npm install
 
 RUN npx prisma migrate deploy
 
+RUN npx prisma generate
+
 # Bundle app source
 
 EXPOSE 3000

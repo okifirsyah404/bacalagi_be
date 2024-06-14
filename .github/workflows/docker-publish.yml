@@ -36,10 +36,10 @@ jobs:
             if [ -z "$SALT_ROUNDS" ]; then echo "SALT_ROUNDS is not set"; else echo "SALT_ROUNDS is set"; fi
 
             touch .env
-            echo DATABASE_URL=$DATABASE_URL >> .env
-            echo FIREBASE_FILE=$FIREBASE_FILE >> .env
-            echo JWT_SECRET=$JWT_SECRET >> .env
-            echo SALT_ROUNDS=$SALT_ROUNDS >> .env
+            DATABASE_URL=$DATABASE_URL >> .env
+            FIREBASE_FILE=$FIREBASE_FILE >> .env
+            JWT_SECRET=$JWT_SECRET >> .env
+            SALT_ROUNDS=$SALT_ROUNDS >> .env
             cat .env
         
       - name: Build Docker image

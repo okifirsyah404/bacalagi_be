@@ -22,6 +22,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
+          echo FIREBASE_FILE=${{ secrets.FIREBASE_FILE }} >> .env
+          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
+          echo SALT_ROUNDS=${{ secrets.SALT_ROUNDS }} >> .env
+          cat .env
         
       - name: Build Docker image
         uses: docker/build-push-action@v4
@@ -35,7 +44,7 @@ jobs:
             "DATABASE_URL=${{ secrets.DATABASE_URL }}"
             "FIREBASE_FILE=${{ secrets.FIREBASE_FILE }}"
             "JWT_SECRET=${{ secrets.JWT_SECRET }}"
-            "SALT_ROUNDS=${{ vars.SALT_ROUNDS }}"
+            "SALT_ROUNDS=${{ secrets.SALT_ROUNDS }}"
 
       - name: Run Docker container
         uses: addnab/docker-run-action@v3

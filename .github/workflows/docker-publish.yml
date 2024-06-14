@@ -31,6 +31,11 @@ jobs:
           tags: bacalagi-be:latest
           load: true
           push: false
+          secrets: |
+            "DATABASE_URL=${{ secrets.DATABASE_URL }}"
+            "FIREBASE_FILE=${{ secrets.FIREBASE_FILE }}"
+            "JWT_SECRET=${{ secrets.JWT_SECRET }}"
+            "SALT_ROUNDS=${{ vars.SALT_ROUNDS }}"
 
       - name: Run Docker container
         uses: addnab/docker-run-action@v3

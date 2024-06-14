@@ -26,10 +26,10 @@ jobs:
       - name: 'Create env file'
         run: |
           touch .env
-          echo DATABASE_URL=${{ secrets.DATABASE_URL }} >> .env
-          echo FIREBASE_FILE=${{ secrets.FIREBASE_FILE }} >> .env
-          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
-          echo SALT_ROUNDS=${{ secrets.SALT_ROUNDS }} >> .env
+          echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> .env
+          echo FIREBASE_FILE="${{ secrets.FIREBASE_FILE }}" >> .env
+          echo JWT_SECRET="${{ secrets.JWT_SECRET }}" >> .env
+          echo SALT_ROUNDS="${{ secrets.SALT_ROUNDS }}" >> .env
           cat .env
         
       - name: Build Docker image

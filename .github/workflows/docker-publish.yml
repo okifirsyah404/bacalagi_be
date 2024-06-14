@@ -15,6 +15,12 @@ on:
   pull_request:
     branches: [ "master", "prod" ]
 
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  FIREBASE_FILE: ${{ secrets.FIREBASE_FILE }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  SALT_ROUNDS: ${{ secrets.SALT_ROUNDS }}
+
 
 jobs:
   build:
@@ -24,11 +30,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set environment variables
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          FIREBASE_FILE: ${{ secrets.FIREBASE_FILE }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          SALT_ROUNDS: ${{ secrets.SALT_ROUNDS }}
         run: |
             if [ -z "$DATABASE_URL" ]; then echo "DATABASE_URL is not set"; else echo "DATABASE_URL is set"; fi
             if [ -z "$FIREBASE_FILE" ]; then echo "FIREBASE_FILE is not set"; else echo "FIREBASE_FILE is set"; fi
@@ -50,17 +51,12 @@ jobs:
           tags: bacalagi-be:latest
           load: true
           push: false
-          secrets: |
-            "DATABASE_URL=${{ secrets.DATABASE_URL }}"
-            "FIREBASE_FILE=${{ secrets.FIREBASE_FILE }}"
-            "JWT_SECRET=${{ secrets.JWT_SECRET }}"
-            "SALT_ROUNDS=${{ secrets.SALT_ROUNDS }}"
 
       - name: Run Docker container
         uses: addnab/docker-run-action@v3
         with:
           image: bacalagi-be:latest
-          options: --name bacalagi-be -p 3000:3000 -e DATABASE_URL=${{ secrets.DATABASE_URL }}
+          options: --name bacalagi-be -p 3000:3000 
           run: echo "Container bacalagi-be Created 💪"
 
         

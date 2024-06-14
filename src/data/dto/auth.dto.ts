@@ -65,13 +65,13 @@ export default class AuthDto {
    */
   @Transform(Transformer.toPrefixIndoensianPhoneNumber)
   @IsPhoneNumber('ID', {
-    message: 'phoneNumber must be a valid Indonesian phone number',
+    message: 'phone Number must be a valid Indonesian phone number',
   })
   @IsString({
-    message: 'phoneNumber must be a string',
+    message: 'phone Number must be a string',
   })
   @IsNotEmpty({
-    message: 'phoneNumber is required',
+    message: 'phoneN umber is required',
   })
   phoneNumber: string;
 

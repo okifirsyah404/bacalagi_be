@@ -4,6 +4,8 @@ import {
   IsOptional,
   IsPhoneNumber,
   IsString,
+  MaxLength,
+  MinLength,
 } from 'class-validator';
 import { Transformer } from 'src/utils/transform/transformer';
 
@@ -66,6 +68,12 @@ export default class AuthDto {
   @Transform(Transformer.toPrefixIndoensianPhoneNumber)
   @IsPhoneNumber('ID', {
     message: 'phone Number must be a valid Indonesian phone number',
+  })
+  @MaxLength(15, {
+    message: 'phone Number must be at least 10 characters',
+  })
+  @MinLength(13, {
+    message: 'phone Number must be at least 10 characters',
   })
   @IsString({
     message: 'phone Number must be a string',

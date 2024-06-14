@@ -10,6 +10,7 @@ import { AuthModule } from './auth/module/auth.module';
 import { AuthRepository } from './auth/repository/auth.repository';
 import { ProfileModule } from './profile/module/profile.module';
 import { ProfileRepository } from './profile/repository/profile.repository';
+import { PostingModule } from './posting/posting.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { ProfileRepository } from './profile/repository/profile.repository';
     }),
     AuthModule,
     ProfileModule,
+    PostingModule,
   ],
   controllers: [AppController],
   providers: [AppService, AuthRepository, ProfileRepository],

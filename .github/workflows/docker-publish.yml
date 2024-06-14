@@ -1,0 +1,43 @@
+name: Docker
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches: [ "master", "prod" ]
+    # Publish semver tags as releases.
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ "master", "prod" ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Build Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: Dockerfile
+          tags: bacalagi-be:latest
+          load: true
+          push: false
+
+      - name: Run Docker container
+        uses: addnab/docker-run-action@v3
+        with:
+          image: bacalagi-be:latest
+          options: --name bacalagi-be -p 3000:3000 
+          run: echo "Container bacalagi-be Created 💪"
+
+        
+      

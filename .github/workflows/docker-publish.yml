@@ -36,7 +36,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: bacalagi-be:latest
-          options: --name bacalagi-be -p 3000:3000 
+          options: --name bacalagi-be -p 3000:3000 -e DATABASE_URL=${{ secrets.DATABASE_URL }}
           run: echo "Container bacalagi-be Created 💪"
 
         

@@ -23,14 +23,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: 'Create env file'
+      - name: Set environment variables
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          FIREBASE_FILE: ${{ secrets.FIREBASE_FILE }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          SALT_ROUNDS: ${{ secrets.SALT_ROUNDS }}
         run: |
-          touch .env
-          echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> .env
-          echo FIREBASE_FILE="${{ secrets.FIREBASE_FILE }}" >> .env
-          echo JWT_SECRET="${{ secrets.JWT_SECRET }}" >> .env
-          echo SALT_ROUNDS="${{ secrets.SALT_ROUNDS }}" >> .env
-          cat .env
+            if [ -z "$DATABASE_URL" ]; then echo "DATABASE_URL is not set"; else echo "DATABASE_URL is set"; fi
+            if [ -z "$FIREBASE_FILE" ]; then echo "FIREBASE_FILE is not set"; else echo "FIREBASE_FILE is set"; fi
+            if [ -z "$JWT_SECRET" ]; then echo "JWT_SECRET is not set"; else echo "JWT_SECRET is set"; fi
+            if [ -z "$SALT_ROUNDS" ]; then echo "SALT_ROUNDS is not set"; else echo "SALT_ROUNDS is set"; fi
+
+            touch .env
+            echo DATABASE_URL=$DATABASE_URL >> .env
+            echo FIREBASE_FILE=$FIREBASE_FILE >> .env
+            echo JWT_SECRET=$JWT_SECRET >> .env
+            echo SALT_ROUNDS=$SALT_ROUNDS >> .env
+            cat .env
         
       - name: Build Docker image
         uses: docker/build-push-action@v4

@@ -52,16 +52,53 @@ model User {
   accountId String? @unique
   profileId String? @unique
 
-  account Account? @relation(fields: [accountId], references: [id])
-  profile Profile? @relation(fields: [profileId], references: [id])
+  account     Account?      @relation(fields: [accountId], references: [id])
+  profile     Profile?      @relation(fields: [profileId], references: [id])
+  Transaction Transaction[]
 }
 
-// Add a new model to the schema
-// Don't forget to run `prisma migrate` after adding model!
+model Book {
+  id String @id @default(cuid())
 
-// model NewModel {}
+  title       String
+  author      String
+  publisher   String
+  publishYear Int
+  buyPrice    Int
+  ISBN        String
+  language    String
 
-// Don't delete model and attribute below
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Transaction Transaction?
+}
+
+model PredictionResult {
+  id String @id @default(cuid())
+
+  bookId String @unique
+  rating BookRating
+  price  Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Transaction {
+  id String @id @default(cuid())
+
+  userId           String
+  bookId           String @unique
+  finalPrice       Int
+  recommendedPrice Int
+  status           ProductStatus
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  book Book @relation(fields: [bookId], references: [id])
+}
 
 model FrequentlyAskedQuestion {
   id String @id @default(cuid())

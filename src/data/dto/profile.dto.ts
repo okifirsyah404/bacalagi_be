@@ -1,4 +1,3 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import {
   IsNotEmpty,
@@ -10,16 +9,14 @@ import {
 } from 'class-validator';
 import { Transformer } from 'src/utils/transform/transformer';
 
-export default class AuthDto {
+export default class ProfileDto {
   constructor(
     name: string,
-    firebaseTokenId: string,
     phoneNumber: string,
     city: string,
     administrationArea: string,
   ) {
     this.name = name;
-    this.firebaseTokenId = firebaseTokenId;
     this.phoneNumber = phoneNumber;
     this.regency = city;
     this.province = administrationArea;
@@ -33,9 +30,6 @@ export default class AuthDto {
    * @decorator `@IsString()`
    *
    */
-  @ApiProperty({
-    example: 'John Doe',
-  })
   @IsString({
     message: 'name must be a string',
   })
@@ -46,26 +40,6 @@ export default class AuthDto {
 
   /**
    *
-   * Firebase JWT token field.
-   *
-   * @decorator `@IsNotEmpty()`
-   * @decorator `@IsString()`
-   *
-   */
-  @ApiProperty({
-    example:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-  })
-  @IsString({
-    message: 'firebaseTokenId must be a string',
-  })
-  @IsNotEmpty({
-    message: 'firebaseTokenId is required',
-  })
-  firebaseTokenId: string;
-
-  /**
-   *
    * Phone number field.
    *
    * @decorator `@IsNotEmpty()`
@@ -73,9 +47,6 @@ export default class AuthDto {
    * @decorator `@IsPhoneNumber('ID')`
    *
    */
-  @ApiProperty({
-    example: '081234567890',
-  })
   @Transform(Transformer.toPrefixIndoensianPhoneNumber)
   @IsPhoneNumber('ID', {
     message: 'phone Number must be a valid Indonesian phone number',
@@ -102,9 +73,6 @@ export default class AuthDto {
    * @decorator `@IsString()`
    *
    */
-  @ApiProperty({
-    example: 'Surabaya',
-  })
   @IsString({
     message: 'regency must be a string',
   })
@@ -121,9 +89,6 @@ export default class AuthDto {
    * @decorator `@IsString()`
    *
    */
-  @ApiProperty({
-    example: 'Jawa Timur',
-  })
   @IsString({
     message: 'province must be a string',
   })
@@ -140,9 +105,6 @@ export default class AuthDto {
    * @decorator `@IsString()`
    *
    */
-  @ApiProperty({
-    example: 'Jl. Raya Darmo Permai III',
-  })
   @IsString({
     message: 'address must be a string',
   })

@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { DatabaseModule } from 'src/data/database/module/database.module';
 import { FirebaseAdminModule } from 'src/services/firebase/module/firebase-admin.module';
@@ -30,10 +29,6 @@ import { ProfileRepository } from './profile/repository/profile.repository';
           'try-learning-firebase-annas-firebase-adminsdk-bh7fi-733c52d926.json',
         ),
       }),
-    }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', 'public'),
-      renderPath: '/',
     }),
     AuthModule,
     ProfileModule,

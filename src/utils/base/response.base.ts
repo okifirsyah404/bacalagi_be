@@ -93,6 +93,15 @@ export class BaseResponse {
     };
   }
 
+  static unsupportedMediaType(data: any, message = 'Not Found') {
+    return {
+      status: 'Unsupported Media Type',
+      statusCode: 415,
+      message: message,
+      data: data,
+    };
+  }
+
   static internalServerError(data: any, message = 'Internal Server Error') {
     return {
       status: 'Internal Server Error',

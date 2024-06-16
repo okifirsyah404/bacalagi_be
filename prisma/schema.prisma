@@ -29,13 +29,12 @@ model Profile {
   id String @id @default(cuid())
 
   name              String
-  phoneNumber       String    @db.VarChar(15)
+  phoneNumber       String  @db.VarChar(15)
   adminAreaLocality String
   cityLocality      String
   address           String?
   avatarUrl         String?
-  dateOfBirth       DateTime?
-  age               Int?
+  about             String? @db.Text
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -52,9 +51,10 @@ model User {
   accountId String? @unique
   profileId String? @unique
 
-  account     Account?      @relation(fields: [accountId], references: [id])
-  profile     Profile?      @relation(fields: [profileId], references: [id])
-  Transaction Transaction[]
+  transactionPost TransactionPost[]
+
+  account Account? @relation(fields: [accountId], references: [id])
+  profile Profile? @relation(fields: [profileId], references: [id])
 }
 
 model Book {
@@ -68,33 +68,44 @@ model Book {
   ISBN        String
   language    String
 
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  Transaction Transaction?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  transactionPost   TransactionPost?
+  predictionResults PredictionResult?
 }
 
 model PredictionResult {
   id String @id @default(cuid())
 
-  bookId String @unique
-  rating BookRating
-  price  Int
+  bookCondition BookCondition
+  percentage    Int
+  ratio         Float
+  buyPrice      Int
+  outputPrice   Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  bookId String? @unique
+
+  book Book? @relation(fields: [bookId], references: [id])
 }
 
-model Transaction {
+model TransactionPost {
   id String @id @default(cuid())
 
-  userId           String
-  bookId           String @unique
+  seenCount        Int           @default(0)
   finalPrice       Int
   recommendedPrice Int
-  status           ProductStatus
+  status           TransactionStatus @default(OPEN)
+  description      String?       @db.Text
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  bookId String @unique
+  userId String
 
   user User @relation(fields: [userId], references: [id])
   book Book @relation(fields: [bookId], references: [id])
@@ -120,6 +131,14 @@ model PrivacyPolicy {
   updatedAt DateTime @updatedAt
 }
 
+enum BookCondition {
+  LIKE_NEW
+  GOOD
+  QUITE_GOOD
+  FAIR
+  POOR
+}
+
 enum BookRating {
   ALL_AGE
   CHILDREN
@@ -127,8 +146,8 @@ enum BookRating {
   ADULT
 }
 
-enum ProductStatus {
-  OPEN_FOR_SALE
-  SOLD_OUT
+enum TransactionStatus {
+  OPEN
+  SOLD
   DISCONTINUED
 }

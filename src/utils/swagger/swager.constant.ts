@@ -5,7 +5,7 @@ export abstract class SwaggerConstant {
 
   static readonly VERSION = process.env.npm_package_version ?? '0.0.1';
 
-  static readonly TITLE = 'Baca Lagi Documnetation';
+  static readonly TITLE = 'Baca Lagi Documentation';
 
   static readonly DESCRIPTION = this.packageJson.description ?? '';
 

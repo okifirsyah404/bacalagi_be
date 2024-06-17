@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/module/auth.module';
 import { AuthRepository } from './auth/repository/auth.repository';
+import { BookModule } from './book/module/book.module';
 import { ProfileModule } from './profile/module/profile.module';
 import { ProfileRepository } from './profile/repository/profile.repository';
 
@@ -35,6 +36,7 @@ import { ProfileRepository } from './profile/repository/profile.repository';
     }),
     AuthModule,
     ProfileModule,
+    BookModule,
   ],
   controllers: [AppController],
   providers: [AppService, AuthRepository, ProfileRepository],

@@ -17,7 +17,9 @@ export async function seedTransactions(prisma: PrismaClient) {
     buyPrice: 100000,
     outputPrice: 80000,
     percentage: 80,
-    ratio: 0.8,
+    overallRatio: 0.8,
+    rippedRatio: 0.2,
+    wornOutRatio: 0.2,
     bookCondition: BookCondition.QUITE_GOOD,
   };
 

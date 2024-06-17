@@ -4,6 +4,8 @@ export class SwaggerTag {
   static AUTH = 'Auth';
   static PROFILE = 'Profile';
   static PROFILE_IMAGE = 'Profile Image';
+  static BOOK_BY_OTHER_USER = 'Book By Other User';
+  static BOOK_BY_POST_AUTHOR = 'Book By Post Author';
 
   private static _authTagObject: TagObject[] = [
     {
@@ -23,8 +25,21 @@ export class SwaggerTag {
     },
   ];
 
+  private static _bookTagObject: TagObject[] = [
+    {
+      name: SwaggerTag.BOOK_BY_OTHER_USER,
+      description: 'Post Book By Other User API',
+    },
+
+    {
+      name: SwaggerTag.BOOK_BY_POST_AUTHOR,
+      description: 'Post Book By Post Author API',
+    },
+  ];
+
   static allTags: TagObject[] = [
     ...SwaggerTag._authTagObject,
     ...SwaggerTag._profileTagObject,
+    ...SwaggerTag._bookTagObject,
   ];
 }

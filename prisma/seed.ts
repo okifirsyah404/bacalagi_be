@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { clearData } from './clear-data';
+import { seedCommon } from './common-seeder';
 import { seedTransactions } from './transaction-seeder';
 import { seedUsers } from './user-seeder';
 
@@ -11,6 +12,8 @@ async function main() {
   await seedUsers(prisma);
 
   await seedTransactions(prisma);
+
+  await seedCommon(prisma);
 
   console.log('Done seeding');
 }

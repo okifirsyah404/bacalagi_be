@@ -1,7 +1,7 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import {
   IsNotEmpty,
-  IsOptional,
   IsPhoneNumber,
   IsString,
   MaxLength,
@@ -15,11 +15,13 @@ export default class ProfileDto {
     phoneNumber: string,
     city: string,
     administrationArea: string,
+    address: string,
   ) {
     this.name = name;
     this.phoneNumber = phoneNumber;
     this.regency = city;
     this.province = administrationArea;
+    this.address = address;
   }
 
   /**
@@ -30,6 +32,9 @@ export default class ProfileDto {
    * @decorator `@IsString()`
    *
    */
+  @ApiProperty({
+    example: 'John Doe',
+  })
   @IsString({
     message: 'name must be a string',
   })
@@ -47,6 +52,11 @@ export default class ProfileDto {
    * @decorator `@IsPhoneNumber('ID')`
    *
    */
+  @ApiProperty({
+    example: '081234567890',
+    maxLength: 13,
+    minLength: 11,
+  })
   @Transform(Transformer.toPrefixIndoensianPhoneNumber)
   @IsPhoneNumber('ID', {
     message: 'phone Number must be a valid Indonesian phone number',
@@ -73,6 +83,9 @@ export default class ProfileDto {
    * @decorator `@IsString()`
    *
    */
+  @ApiProperty({
+    example: 'Surabaya',
+  })
   @IsString({
     message: 'regency must be a string',
   })
@@ -89,6 +102,9 @@ export default class ProfileDto {
    * @decorator `@IsString()`
    *
    */
+  @ApiProperty({
+    example: 'Jawa Timur',
+  })
   @IsString({
     message: 'province must be a string',
   })
@@ -105,9 +121,14 @@ export default class ProfileDto {
    * @decorator `@IsString()`
    *
    */
+  @ApiProperty({
+    example: 'Surabaya',
+  })
   @IsString({
     message: 'address must be a string',
   })
-  @IsOptional()
-  address?: string;
+  @IsNotEmpty({
+    message: 'address is required',
+  })
+  address: string;
 }

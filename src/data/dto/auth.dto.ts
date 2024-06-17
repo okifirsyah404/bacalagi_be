@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import {
   IsNotEmpty,
-  IsOptional,
   IsPhoneNumber,
   IsString,
   MaxLength,
@@ -17,12 +16,14 @@ export default class AuthDto {
     phoneNumber: string,
     city: string,
     administrationArea: string,
+    address: string,
   ) {
     this.name = name;
     this.firebaseTokenId = firebaseTokenId;
     this.phoneNumber = phoneNumber;
     this.regency = city;
     this.province = administrationArea;
+    this.address = address;
   }
 
   /**
@@ -75,6 +76,8 @@ export default class AuthDto {
    */
   @ApiProperty({
     example: '081234567890',
+    maxLength: 13,
+    minLength: 11,
   })
   @Transform(Transformer.toPrefixIndoensianPhoneNumber)
   @IsPhoneNumber('ID', {
@@ -146,6 +149,8 @@ export default class AuthDto {
   @IsString({
     message: 'address must be a string',
   })
-  @IsOptional()
-  address?: string;
+  @IsNotEmpty({
+    message: 'address is required',
+  })
+  address: string;
 }

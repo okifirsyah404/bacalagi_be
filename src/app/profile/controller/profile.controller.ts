@@ -30,14 +30,14 @@ import { UpdateProfileDto } from '../dto/update-profile.dto';
 import { ProfileService } from '../service/profile.service';
 import { ProfileExample } from '../swagger/profile.example';
 
-@ApiInternalServerErrorResponse({
-  description: 'Error caused by database or server error',
-})
 @ApiUnauthorizedResponse({
   description: 'Unauthorized user',
   schema: {
     example: BaseResponse.unauthorized(null),
   },
+})
+@ApiInternalServerErrorResponse({
+  description: 'Error caused by database or server error',
 })
 @UseGuards(AuthGuard)
 @Controller('profile')

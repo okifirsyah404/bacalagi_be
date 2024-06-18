@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import * as fs from 'fs';
+import * as path from 'path';
 import * as FormData from 'form-data';
 
 @Injectable()
@@ -15,7 +16,13 @@ export class HttpHandlerService {
    */
   async sendImageToModel(postId: string, purchasePrice: number): Promise<any> {
     const formData = new FormData();
-    const imagePath = `${process.cwd()}/public/image/post/${postId}.png`;
+    const imagePath = path.join(
+      process.cwd(),
+      'public',
+      'image',
+      'post',
+      `${postId}.png`,
+    );
 
     if (!fs.existsSync(imagePath)) {
       throw new Error(`Image file not found at path: ${imagePath}`);
@@ -31,7 +38,6 @@ export class HttpHandlerService {
         headers: formData.getHeaders(),
         data: formData,
       });
-
       return response.data;
     } catch (error) {
       throw new Error(`Failed to send image to model: ${error}`);

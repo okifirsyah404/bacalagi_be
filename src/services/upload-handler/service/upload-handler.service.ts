@@ -33,34 +33,16 @@ export class UploadHandlerService {
     const userDir = path.join(this.imageDir, 'user');
 
     if (!fs.existsSync(userDir)) {
-      fs.mkdirSync(userDir, { recursive: true });
+      fs.mkdirSync(userDir);
     }
 
     const filePath = path.join(userDir, `${userId}.png`);
 
     const writer = fs.createWriteStream(filePath);
 
-    const response = await this.httpService.axiosRef({
-      url: imageUrl,
+    const response = await this.httpService.axiosRef(imageUrl, {
       responseType: 'stream',
       method: 'GET',
-    });
-
-    const formData = new FormData();
-    formData.append(
-      'file',
-      fs.createReadStream(
-        path.join(__dirname, '..', '..', 'pict', 'test1.jpg'),
-      ),
-    );
-
-    await this.httpService.axiosRef({
-      url: 'http://localhost:8000/predict-image',
-      method: 'POST',
-      headers: {
-        ...formData.getHeaders(),
-      },
-      data: formData,
     });
 
     response.data.pipe(writer);

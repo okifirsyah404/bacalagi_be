@@ -17,9 +17,9 @@ export class QueryDto {
   @IsNumber(
     {},
     {
-      message: 'Limit must be a number',
+      message: 'Size must be a number',
     },
   )
   @IsOptional()
-  limit?: number;
+  size?: number;
 }

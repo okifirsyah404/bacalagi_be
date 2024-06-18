@@ -1,29 +1,37 @@
+import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
+import { fileFromPath } from 'formdata-node/file-from-path';
 
 @Injectable()
 export class HttpHandlerService {
-  // const toModel1 = await this.httpService.axiosRef(
-  //     'http://localhost:3000/detect-image',
-  //     {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'multipart/form-data' },
-  //       data: {
-  //         file: fs.createReadStream(
-  //           `${process.cwd()}/public/image/post/${postid}.png}]`,
-  //         ),
-  //       },
-  //     },
-  //   );
-  //   const toModel2 = await this.httpService.axiosRef(
-  //     'http://localhost:3000/predict-price',
-  //     {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       data: {
-  //         ratio_ripped: 0.5,
-  //         ratio_worn_out: 0.5,
-  //         price: 100000,
-  //       },
-  //     },
-  //   );
+  constructor(private readonly httpService: HttpService) {}
+
+  async sendDataToModel(data: { imagePath: string; purchasePrice: number }) {
+    // const imageFile = fs.readFileSync(data.imagePath);
+
+    const form = new FormData();
+
+    form.append('file', await fileFromPath(data.imagePath));
+    form.append('purchase_price', data.purchasePrice.toString());
+
+    const response = await this.httpService
+      .axiosRef(`${process.env.FAST_API_HOST}/predict-image`, {
+        method: 'POST',
+        data: form,
+      })
+      .catch((error) => {
+        throw error;
+      });
+
+    const responseData = {
+      wornOut: response.data.Wornout,
+      ripped: response.data.Ripped,
+      wornOutRatio: response.data.Rasio_Wornout,
+      rippedRatio: response.data.Rasio_Ripped,
+      overallRatio: response.data.Overall_Ratio,
+      recommendedPrice: response.data.Recommended_Price,
+    };
+
+    return responseData;
+  }
 }

@@ -30,6 +30,8 @@ export async function seedTransactions(prisma: PrismaClient) {
     language: 'English',
     buyPrice: 100000,
     publisher: 'Crown Business',
+    imageUrl:
+      'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
     publishYear: 2011,
     predictionResults: {
       create: predictionResult,

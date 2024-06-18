@@ -11,6 +11,7 @@ import { AuthRepository } from './auth/repository/auth.repository';
 import { BookModule } from './book/module/book.module';
 import { ProfileModule } from './profile/module/profile.module';
 import { ProfileRepository } from './profile/repository/profile.repository';
+import { BookRepository } from './book/repository/book.repository';
 
 @Module({
   imports: [
@@ -39,6 +40,6 @@ import { ProfileRepository } from './profile/repository/profile.repository';
     BookModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AuthRepository, ProfileRepository],
+  providers: [AppService, AuthRepository, ProfileRepository, BookRepository],
 })
 export class AppModule {}

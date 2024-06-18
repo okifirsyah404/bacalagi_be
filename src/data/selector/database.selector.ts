@@ -23,4 +23,37 @@ export default abstract class DatabaseSelector {
       select: DatabaseSelector.profile,
     },
   } satisfies Prisma.UserSelect;
+
+  static book = {
+    id: true,
+    title: true,
+    author: true,
+    ISBN: true,
+    publisher: true,
+    publishYear: true,
+    language: true,
+    imageUrl: true,
+    buyPrice: true,
+  } satisfies Prisma.BookSelect;
+
+  static transactionPost = {
+    id: true,
+    status: true,
+    finalPrice: true,
+    recommendedPrice: true,
+    description: true,
+    seenCount: true,
+    createdAt: true,
+  } satisfies Prisma.TransactionPostSelect;
+
+  static predictionResult = {
+    id: true,
+    bookCondition: true,
+    buyPrice: true,
+    outputPrice: true,
+    percentage: true,
+    rippedRatio: true,
+    wornOutRatio: true,
+    overallRatio: true,
+  } satisfies Prisma.PredictionResultSelect;
 }

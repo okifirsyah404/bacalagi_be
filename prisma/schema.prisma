@@ -67,6 +67,7 @@ model Book {
   buyPrice    Int
   ISBN        String
   language    String
+  imageUrl    String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

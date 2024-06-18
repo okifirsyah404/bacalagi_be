@@ -10,6 +10,8 @@ RUN apt-get update -y && apt-get install -y openssl
 
 RUN npm install
 
+RUN npx prisma migrate deploy
+
 RUN npx prisma generate
 
 # Bundle app source

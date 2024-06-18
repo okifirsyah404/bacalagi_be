@@ -12,7 +12,65 @@ export class ProfileRepository {
       where: {
         id,
       },
-      select: DatabaseSelector.user,
+      select: {
+        ...DatabaseSelector.user,
+        account: {
+          select: DatabaseSelector.account,
+        },
+      },
+    });
+
+    return profile;
+  }
+
+  async updateProfileById(
+    id: string,
+    data: {
+      name: string;
+      cityLocality: string;
+      phoneNumber: string;
+      adminAreaLocality: string;
+      address?: string;
+    },
+  ) {
+    const profile = await this.database.user.update({
+      where: {
+        id,
+      },
+      data: {
+        profile: {
+          update: {
+            name: data.name,
+            phoneNumber: data.phoneNumber,
+            cityLocality: data.cityLocality,
+            adminAreaLocality: data.adminAreaLocality,
+            address: data.address,
+          },
+        },
+      },
+      select: {
+        ...DatabaseSelector.user,
+      },
+    });
+
+    return profile;
+  }
+
+  async updateProfileImage(id: string, imageUrl: string) {
+    const profile = await this.database.user.update({
+      where: {
+        id,
+      },
+      data: {
+        profile: {
+          update: {
+            avatarUrl: imageUrl,
+          },
+        },
+      },
+      select: {
+        ...DatabaseSelector.user,
+      },
     });
 
     return profile;

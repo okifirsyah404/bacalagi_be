@@ -34,7 +34,7 @@ export class HttpHandlerService {
 
       return response.data;
     } catch (error) {
-      throw new Error(`Failed to send image to model: ${error.message}`);
+      throw new Error(`Failed to send image to model: ${error}`);
     }
   }
 }

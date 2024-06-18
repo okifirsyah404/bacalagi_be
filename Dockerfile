@@ -14,6 +14,8 @@ RUN npx prisma migrate deploy
 
 RUN npx prisma generate
 
+RUN npm run db:seed
+
 # Bundle app source
 
 EXPOSE 3000

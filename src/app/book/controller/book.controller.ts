@@ -7,7 +7,9 @@ import {
   Put,
   Query,
   Req,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/app/auth/guards/auth.guard';
@@ -17,11 +19,39 @@ import { FindManyBookQueryParamDto } from '../dto/find-many-book-query-param.dto
 import { SearchBookQueryParamDto } from '../dto/search-book-query-param.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
 import { BookService } from '../service/book.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Express } from 'express';
+import { UploadHandlerService } from 'src/services/upload-handler/service/upload-handler.service';
 
 @UseGuards(AuthGuard)
 @Controller('book')
 export class BookController {
-  constructor(private readonly bookService: BookService) {}
+  constructor(
+    private readonly bookService: BookService,
+    private readonly uploadHandlerService: UploadHandlerService,
+  ) {}
+
+  /**
+   * Endpoint to upload an image for prediction.
+   * @param file - The uploaded image file.
+   * @param userId - The ID of the user.
+   * @param purchasePrice - The purchase price of the item.
+   * @returns The prediction results from the model.
+   */
+  @Post('predict')
+  @UseInterceptors(FileInterceptor('file'))
+  async predictImage(
+    @UploadedFile() file: Express.Multer.File,
+    @Body('userId') userId: string,
+    @Body('purchasePrice') purchasePrice: number,
+  ) {
+    const predictionResults = await this.uploadHandlerService.handleImageUpload(
+      file,
+      userId,
+      purchasePrice,
+    );
+    return predictionResults;
+  }
 
   @ApiTags(SwaggerTag.BOOK_BY_POST_AUTHOR)
   @Post()
@@ -54,6 +84,7 @@ export class BookController {
 
     // TODO: Implement the findAllByAuthor method
   }
+
   @ApiTags(SwaggerTag.BOOK_BY_OTHER_USER)
   @Get(':id')
   findOne(@Req() req: any, @Param('id') postId: string) {
@@ -63,7 +94,7 @@ export class BookController {
 
   @ApiTags(SwaggerTag.BOOK_BY_POST_AUTHOR)
   @Get('author/:id')
-  fionOneByAuthor(@Req() req: any, @Param('id') postId: string) {
+  findOneByAuthor(@Req() req: any, @Param('id') postId: string) {
     const userId = req.payload.id;
     // TODO: Implement the findOneByAuthor method
   }

@@ -5,6 +5,7 @@ import * as path from 'path';
 import { GoogleCloudStorageService } from 'src/services/google-cloud-service/service/google-cloud-service.service';
 import { MainLogger } from 'src/utils/logger/provider/main-logger.provider';
 import * as util from 'util';
+import * as FormData from 'form-data';
 
 @Injectable()
 export class UploadHandlerService {
@@ -15,9 +16,7 @@ export class UploadHandlerService {
   ) {}
 
   private readonly publicDir = path.join(process.cwd(), 'public');
-
   private readonly imageDir = path.join(this.publicDir, 'images');
-
   private copyFileAsync = util.promisify(fs.copyFile);
   private unlinkAsync = util.promisify(fs.unlink);
 
@@ -163,6 +162,52 @@ export class UploadHandlerService {
         },
       );
     });
+  }
+
+  /**
+   * Handles the uploading of an image, sends it to the FastAPI model for prediction, and returns the results.
+   * @param file - The uploaded image file.
+   * @param userId - The ID of the user.
+   * @param purchasePrice - The purchase price of the item.
+   * @returns A promise that resolves to the prediction result.
+   */
+  async handleImageUpload(
+    file: Express.Multer.File,
+    userId: string,
+    purchasePrice: number,
+  ): Promise<any> {
+    await this._checkPublicDir();
+
+    const userDir = path.join(this.imageDir, 'user');
+
+    if (!fs.existsSync(userDir)) {
+      fs.mkdirSync(userDir);
+    }
+
+    const filePath = path.join(userDir, `${userId}-${file.originalname}`);
+
+    fs.writeFileSync(filePath, file.buffer);
+    const formData = new FormData();
+    formData.append('file', fs.createReadStream(filePath));
+    formData.append('purchase_price', purchasePrice.toString());
+
+    try {
+      const response = await this.httpService.axiosRef({
+        url: 'http://localhost:8000/predict-image',
+        method: 'POST',
+        headers: formData.getHeaders(),
+        data: formData,
+      });
+
+      this.logger.debug(`Prediction results: ${JSON.stringify(response.data)}`);
+
+      fs.unlinkSync(filePath);
+
+      return response.data;
+    } catch (error) {
+      this.logger.error(`Failed to send image to model: ${error}`);
+      throw new Error(`Failed to send image to model: ${error}`);
+    }
   }
 
   /**

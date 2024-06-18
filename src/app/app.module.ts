@@ -11,6 +11,7 @@ import { AuthRepository } from './auth/repository/auth.repository';
 import { BookModule } from './book/module/book.module';
 import { ProfileModule } from './profile/module/profile.module';
 import { ProfileRepository } from './profile/repository/profile.repository';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -37,6 +38,9 @@ import { ProfileRepository } from './profile/repository/profile.repository';
     AuthModule,
     ProfileModule,
     BookModule,
+    MulterModule.register({
+      dest: './uploads',
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, AuthRepository, ProfileRepository],

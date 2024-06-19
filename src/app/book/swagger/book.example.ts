@@ -5,7 +5,18 @@ export class BookExample {
     total: 30,
   };
 
-  static postBookExample = {
+  static predictionResultExample = {
+    id: '',
+    bookCondition: 'GOOD',
+    buyPrice: 75000,
+    outputPrice: 63500,
+    percentage: 96,
+    rippedRatio: 0,
+    wornOutRatio: 7.78,
+    overallRatio: 96.11,
+  };
+
+  static productExample = {
     id: 'clxknfxxv000l4bwkvp7j1mdv',
     status: 'OPEN',
     finalPrice: 80000,
@@ -50,18 +61,63 @@ export class BookExample {
     },
   };
 
+  static soldproductExample = {
+    id: 'clxknfxxv000l4bwkvp7j1mdv',
+    status: 'SOLD',
+    finalPrice: 80000,
+    recommendedPrice: 80000,
+    description:
+      'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
+    seenCount: 0,
+    createdAt: '2024-06-18T16:59:21.620Z',
+    book: {
+      id: 'clxknfxxw000m4bwk91epegvu',
+      title: 'The Lean Startup',
+      author: 'Eric Ries',
+      ISBN: '9780307887894',
+      publisher: 'Crown Business',
+      publishYear: 2011,
+      language: 'English',
+      imageUrl:
+        'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
+      buyPrice: 100000,
+      predictionResults: {
+        id: 'clxknfxxw000n4bwk3aduvcs9',
+        bookCondition: 'QUITE_GOOD',
+        buyPrice: 100000,
+        outputPrice: 80000,
+        percentage: 80,
+        rippedRatio: 0.2,
+        wornOutRatio: 0.2,
+        overallRatio: 0.8,
+      },
+    },
+    user: {
+      id: 'clxknfuoj00004bwkz18ibxsx',
+      profile: {
+        id: 'clxknfuom00024bwknpy2ria8',
+        name: 'John Doe',
+        avatarUrl: 'https://picsum.photos/200',
+        phoneNumber: '+6281234567890',
+        adminAreaLocality: 'Jawa Timur',
+        cityLocality: 'Surabaya',
+        address: 'Jl. Raya Darmo Permai III',
+      },
+    },
+  };
+
   static openSaleBookExample = [
     {
-      id: 'clxknfvja00094bwkzs3ogfy8',
+      id: 'clxkng284001x4bwk2de4s4yx',
       status: 'OPEN',
       finalPrice: 80000,
       recommendedPrice: 80000,
       description:
         'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
-      seenCount: 0,
-      createdAt: '2024-06-18T16:59:18.502Z',
+      seenCount: 5,
+      createdAt: '2024-06-18T16:59:27.172Z',
       book: {
-        id: 'clxknfvja000a4bwk8gk4emzq',
+        id: 'clxkng284001y4bwk1hf9g7qc',
         title: 'The Lean Startup',
         author: 'Eric Ries',
         ISBN: '9780307887894',
@@ -71,21 +127,11 @@ export class BookExample {
         imageUrl:
           'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
         buyPrice: 100000,
-        predictionResults: {
-          id: 'clxknfvja000b4bwkzi8aoq5n',
-          bookCondition: 'QUITE_GOOD',
-          buyPrice: 100000,
-          outputPrice: 80000,
-          percentage: 80,
-          rippedRatio: 0.2,
-          wornOutRatio: 0.2,
-          overallRatio: 0.8,
-        },
       },
       user: {
-        id: 'clxknfuoj00004bwkz18ibxsx',
+        id: 'clxknfv9t00064bwkepbq8r7t',
         profile: {
-          id: 'clxknfuom00024bwknpy2ria8',
+          id: 'clxknfv9t00084bwke6odfwea',
           name: 'John Doe',
           avatarUrl: 'https://picsum.photos/200',
           phoneNumber: '+6281234567890',
@@ -96,16 +142,16 @@ export class BookExample {
       },
     },
     {
-      id: 'clxknfwjc000c4bwk6aimhz5a',
+      id: 'clxkng2iq00204bwkmmmiwixu',
       status: 'OPEN',
       finalPrice: 80000,
       recommendedPrice: 80000,
       description:
         'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
       seenCount: 0,
-      createdAt: '2024-06-18T16:59:19.800Z',
+      createdAt: '2024-06-18T16:59:27.554Z',
       book: {
-        id: 'clxknfwjc000d4bwkkv95les1',
+        id: 'clxkng2iq00214bwkk8mkktzx',
         title: 'The Lean Startup',
         author: 'Eric Ries',
         ISBN: '9780307887894',
@@ -115,21 +161,11 @@ export class BookExample {
         imageUrl:
           'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
         buyPrice: 100000,
-        predictionResults: {
-          id: 'clxknfwjc000e4bwkwbcswqfb',
-          bookCondition: 'QUITE_GOOD',
-          buyPrice: 100000,
-          outputPrice: 80000,
-          percentage: 80,
-          rippedRatio: 0.2,
-          wornOutRatio: 0.2,
-          overallRatio: 0.8,
-        },
       },
       user: {
-        id: 'clxknfuoj00004bwkz18ibxsx',
+        id: 'clxknfv9t00064bwkepbq8r7t',
         profile: {
-          id: 'clxknfuom00024bwknpy2ria8',
+          id: 'clxknfv9t00084bwke6odfwea',
           name: 'John Doe',
           avatarUrl: 'https://picsum.photos/200',
           phoneNumber: '+6281234567890',
@@ -140,16 +176,16 @@ export class BookExample {
       },
     },
     {
-      id: 'clxknfx1f000f4bwksqsgprgx',
+      id: 'clxkng2rh00234bwkzchjxzkz',
       status: 'OPEN',
       finalPrice: 80000,
       recommendedPrice: 80000,
       description:
         'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
       seenCount: 0,
-      createdAt: '2024-06-18T16:59:20.451Z',
+      createdAt: '2024-06-18T16:59:27.870Z',
       book: {
-        id: 'clxknfx1f000g4bwkt8dgrsq4',
+        id: 'clxkng2rh00244bwkhv5dnvzq',
         title: 'The Lean Startup',
         author: 'Eric Ries',
         ISBN: '9780307887894',
@@ -159,21 +195,11 @@ export class BookExample {
         imageUrl:
           'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
         buyPrice: 100000,
-        predictionResults: {
-          id: 'clxknfx1f000h4bwkizd55fqp',
-          bookCondition: 'QUITE_GOOD',
-          buyPrice: 100000,
-          outputPrice: 80000,
-          percentage: 80,
-          rippedRatio: 0.2,
-          wornOutRatio: 0.2,
-          overallRatio: 0.8,
-        },
       },
       user: {
-        id: 'clxknfuoj00004bwkz18ibxsx',
+        id: 'clxknfv9t00064bwkepbq8r7t',
         profile: {
-          id: 'clxknfuom00024bwknpy2ria8',
+          id: 'clxknfv9t00084bwke6odfwea',
           name: 'John Doe',
           avatarUrl: 'https://picsum.photos/200',
           phoneNumber: '+6281234567890',
@@ -184,16 +210,16 @@ export class BookExample {
       },
     },
     {
-      id: 'clxknfxm1000i4bwkga4e2n8g',
+      id: 'clxkng30o00264bwkm6h4tqo1',
       status: 'OPEN',
       finalPrice: 80000,
       recommendedPrice: 80000,
       description:
         'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
       seenCount: 0,
-      createdAt: '2024-06-18T16:59:21.194Z',
+      createdAt: '2024-06-18T16:59:28.200Z',
       book: {
-        id: 'clxknfxm1000j4bwkh0ij0mho',
+        id: 'clxkng30o00274bwk4cynrdmg',
         title: 'The Lean Startup',
         author: 'Eric Ries',
         ISBN: '9780307887894',
@@ -203,21 +229,11 @@ export class BookExample {
         imageUrl:
           'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
         buyPrice: 100000,
-        predictionResults: {
-          id: 'clxknfxm1000k4bwkpm8ls6qq',
-          bookCondition: 'QUITE_GOOD',
-          buyPrice: 100000,
-          outputPrice: 80000,
-          percentage: 80,
-          rippedRatio: 0.2,
-          wornOutRatio: 0.2,
-          overallRatio: 0.8,
-        },
       },
       user: {
-        id: 'clxknfuoj00004bwkz18ibxsx',
+        id: 'clxknfv9t00064bwkepbq8r7t',
         profile: {
-          id: 'clxknfuom00024bwknpy2ria8',
+          id: 'clxknfv9t00084bwke6odfwea',
           name: 'John Doe',
           avatarUrl: 'https://picsum.photos/200',
           phoneNumber: '+6281234567890',
@@ -228,16 +244,16 @@ export class BookExample {
       },
     },
     {
-      id: 'clxknfxxv000l4bwkvp7j1mdv',
+      id: 'clxkng3a300294bwkbhqdsz04',
       status: 'OPEN',
       finalPrice: 80000,
       recommendedPrice: 80000,
       description:
         'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
       seenCount: 0,
-      createdAt: '2024-06-18T16:59:21.620Z',
+      createdAt: '2024-06-18T16:59:28.540Z',
       book: {
-        id: 'clxknfxxw000m4bwk91epegvu',
+        id: 'clxkng3a3002a4bwk47zupnzj',
         title: 'The Lean Startup',
         author: 'Eric Ries',
         ISBN: '9780307887894',
@@ -247,21 +263,11 @@ export class BookExample {
         imageUrl:
           'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
         buyPrice: 100000,
-        predictionResults: {
-          id: 'clxknfxxw000n4bwk3aduvcs9',
-          bookCondition: 'QUITE_GOOD',
-          buyPrice: 100000,
-          outputPrice: 80000,
-          percentage: 80,
-          rippedRatio: 0.2,
-          wornOutRatio: 0.2,
-          overallRatio: 0.8,
-        },
       },
       user: {
-        id: 'clxknfuoj00004bwkz18ibxsx',
+        id: 'clxknfv9t00064bwkepbq8r7t',
         profile: {
-          id: 'clxknfuom00024bwknpy2ria8',
+          id: 'clxknfv9t00084bwke6odfwea',
           name: 'John Doe',
           avatarUrl: 'https://picsum.photos/200',
           phoneNumber: '+6281234567890',
@@ -272,16 +278,16 @@ export class BookExample {
       },
     },
     {
-      id: 'clxknfy8c000o4bwkk0abl284',
+      id: 'clxkng3kd002c4bwkqwyf3b6s',
       status: 'OPEN',
       finalPrice: 80000,
       recommendedPrice: 80000,
       description:
         'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
       seenCount: 0,
-      createdAt: '2024-06-18T16:59:21.996Z',
+      createdAt: '2024-06-18T16:59:28.910Z',
       book: {
-        id: 'clxknfy8c000p4bwkwibh2q68',
+        id: 'clxkng3kd002d4bwknu0u718a',
         title: 'The Lean Startup',
         author: 'Eric Ries',
         ISBN: '9780307887894',
@@ -291,21 +297,11 @@ export class BookExample {
         imageUrl:
           'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
         buyPrice: 100000,
-        predictionResults: {
-          id: 'clxknfy8c000q4bwkuwqxbnbu',
-          bookCondition: 'QUITE_GOOD',
-          buyPrice: 100000,
-          outputPrice: 80000,
-          percentage: 80,
-          rippedRatio: 0.2,
-          wornOutRatio: 0.2,
-          overallRatio: 0.8,
-        },
       },
       user: {
-        id: 'clxknfuoj00004bwkz18ibxsx',
+        id: 'clxknfv9t00064bwkepbq8r7t',
         profile: {
-          id: 'clxknfuom00024bwknpy2ria8',
+          id: 'clxknfv9t00084bwke6odfwea',
           name: 'John Doe',
           avatarUrl: 'https://picsum.photos/200',
           phoneNumber: '+6281234567890',
@@ -316,16 +312,16 @@ export class BookExample {
       },
     },
     {
-      id: 'clxknfyif000r4bwkdcs0fimj',
+      id: 'clxkng3u4002f4bwkt2ti0k4d',
       status: 'OPEN',
       finalPrice: 80000,
       recommendedPrice: 80000,
       description:
         'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
       seenCount: 0,
-      createdAt: '2024-06-18T16:59:22.360Z',
+      createdAt: '2024-06-18T16:59:29.260Z',
       book: {
-        id: 'clxknfyif000s4bwkq08d1yz7',
+        id: 'clxkng3u4002g4bwk7v4mzgwa',
         title: 'The Lean Startup',
         author: 'Eric Ries',
         ISBN: '9780307887894',
@@ -335,21 +331,11 @@ export class BookExample {
         imageUrl:
           'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
         buyPrice: 100000,
-        predictionResults: {
-          id: 'clxknfyif000t4bwkkvkqg2xj',
-          bookCondition: 'QUITE_GOOD',
-          buyPrice: 100000,
-          outputPrice: 80000,
-          percentage: 80,
-          rippedRatio: 0.2,
-          wornOutRatio: 0.2,
-          overallRatio: 0.8,
-        },
       },
       user: {
-        id: 'clxknfuoj00004bwkz18ibxsx',
+        id: 'clxknfv9t00064bwkepbq8r7t',
         profile: {
-          id: 'clxknfuom00024bwknpy2ria8',
+          id: 'clxknfv9t00084bwke6odfwea',
           name: 'John Doe',
           avatarUrl: 'https://picsum.photos/200',
           phoneNumber: '+6281234567890',
@@ -360,16 +346,16 @@ export class BookExample {
       },
     },
     {
-      id: 'clxknfysi000u4bwkx9yp6vbn',
+      id: 'clxkng45n002i4bwksj3m6ah3',
       status: 'OPEN',
       finalPrice: 80000,
       recommendedPrice: 80000,
       description:
         'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
       seenCount: 0,
-      createdAt: '2024-06-18T16:59:22.723Z',
+      createdAt: '2024-06-18T16:59:29.675Z',
       book: {
-        id: 'clxknfysj000v4bwkeucwu780',
+        id: 'clxkng45n002j4bwky7cjsw1z',
         title: 'The Lean Startup',
         author: 'Eric Ries',
         ISBN: '9780307887894',
@@ -379,21 +365,11 @@ export class BookExample {
         imageUrl:
           'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
         buyPrice: 100000,
-        predictionResults: {
-          id: 'clxknfysj000w4bwkfqzyjvnc',
-          bookCondition: 'QUITE_GOOD',
-          buyPrice: 100000,
-          outputPrice: 80000,
-          percentage: 80,
-          rippedRatio: 0.2,
-          wornOutRatio: 0.2,
-          overallRatio: 0.8,
-        },
       },
       user: {
-        id: 'clxknfuoj00004bwkz18ibxsx',
+        id: 'clxknfv9t00064bwkepbq8r7t',
         profile: {
-          id: 'clxknfuom00024bwknpy2ria8',
+          id: 'clxknfv9t00084bwke6odfwea',
           name: 'John Doe',
           avatarUrl: 'https://picsum.photos/200',
           phoneNumber: '+6281234567890',
@@ -404,16 +380,16 @@ export class BookExample {
       },
     },
     {
-      id: 'clxknfz1w000x4bwkbpfyiy96',
+      id: 'clxkng4f7002l4bwkcy5axw5w',
       status: 'OPEN',
       finalPrice: 80000,
       recommendedPrice: 80000,
       description:
         'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
       seenCount: 0,
-      createdAt: '2024-06-18T16:59:23.060Z',
+      createdAt: '2024-06-18T16:59:30.020Z',
       book: {
-        id: 'clxknfz1w000y4bwk0ix71v2u',
+        id: 'clxkng4f7002m4bwkx6oviecj',
         title: 'The Lean Startup',
         author: 'Eric Ries',
         ISBN: '9780307887894',
@@ -423,21 +399,11 @@ export class BookExample {
         imageUrl:
           'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
         buyPrice: 100000,
-        predictionResults: {
-          id: 'clxknfz1w000z4bwk0sw9rd6d',
-          bookCondition: 'QUITE_GOOD',
-          buyPrice: 100000,
-          outputPrice: 80000,
-          percentage: 80,
-          rippedRatio: 0.2,
-          wornOutRatio: 0.2,
-          overallRatio: 0.8,
-        },
       },
       user: {
-        id: 'clxknfuoj00004bwkz18ibxsx',
+        id: 'clxknfv9t00064bwkepbq8r7t',
         profile: {
-          id: 'clxknfuom00024bwknpy2ria8',
+          id: 'clxknfv9t00084bwke6odfwea',
           name: 'John Doe',
           avatarUrl: 'https://picsum.photos/200',
           phoneNumber: '+6281234567890',
@@ -448,16 +414,16 @@ export class BookExample {
       },
     },
     {
-      id: 'clxknfzc300104bwks84q39pt',
+      id: 'clxkng4rv002o4bwk8xqo7p6x',
       status: 'OPEN',
       finalPrice: 80000,
       recommendedPrice: 80000,
       description:
         'The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.',
       seenCount: 0,
-      createdAt: '2024-06-18T16:59:23.428Z',
+      createdAt: '2024-06-18T16:59:30.475Z',
       book: {
-        id: 'clxknfzc300114bwkc0tswlnz',
+        id: 'clxkng4rv002p4bwkrw8yatkr',
         title: 'The Lean Startup',
         author: 'Eric Ries',
         ISBN: '9780307887894',
@@ -467,27 +433,119 @@ export class BookExample {
         imageUrl:
           'https://storage.googleapis.com/bucket-storage-request/images/user/CJWuRWiybje4V63JqMYdw0XNru83/CJWuRWiybje4V63JqMYdw0XNru83.png',
         buyPrice: 100000,
-        predictionResults: {
-          id: 'clxknfzc300124bwk9ha0p65f',
-          bookCondition: 'QUITE_GOOD',
-          buyPrice: 100000,
-          outputPrice: 80000,
-          percentage: 80,
-          rippedRatio: 0.2,
-          wornOutRatio: 0.2,
-          overallRatio: 0.8,
-        },
       },
       user: {
-        id: 'clxknfuoj00004bwkz18ibxsx',
+        id: 'clxknfv9t00064bwkepbq8r7t',
         profile: {
-          id: 'clxknfuom00024bwknpy2ria8',
+          id: 'clxknfv9t00084bwke6odfwea',
           name: 'John Doe',
           avatarUrl: 'https://picsum.photos/200',
           phoneNumber: '+6281234567890',
           adminAreaLocality: 'Jawa Timur',
           cityLocality: 'Surabaya',
           address: 'Jl. Raya Darmo Permai III',
+        },
+      },
+    },
+    {
+      id: 'clxm5bkn20000fdjuk9jrcmle',
+      status: 'OPEN',
+      finalPrice: 64000,
+      recommendedPrice: 64000,
+      description: 'Buku nasi jerman',
+      seenCount: 0,
+      createdAt: '2024-06-19T18:07:37.022Z',
+      book: {
+        id: 'clxm5bkn20001fdjub9i6jzyc',
+        title: 'Mein Kamf',
+        author: 'Adolf Hitler',
+        ISBN: '979-168-003-7',
+        publisher: 'NARASI',
+        publishYear: 2007,
+        language: 'Indonesia',
+        imageUrl:
+          'https://storage.googleapis.com/bucket-storage-request/images/post/clxm5bkn20000fdjuk9jrcmle/clxm5bkn20000fdjuk9jrcmle.jpg',
+        buyPrice: 75000,
+      },
+      user: {
+        id: 'clxlpe2t200007onksaw4yry0',
+        profile: {
+          id: 'clxlpe2t900027onkfvgxj25i',
+          name: 'Oki Firdaus Syah Putra',
+          avatarUrl:
+            'https://storage.googleapis.com/bucket-storage-request/images/user/clxlpe2t200007onksaw4yry0/clxlpe2t200007onksaw4yry0.png',
+          phoneNumber: '+6281234567890',
+          adminAreaLocality: 'Jawa Timur',
+          cityLocality: 'Kabupaten Bondowoso',
+          address: 'Bondowoso',
+        },
+      },
+    },
+    {
+      id: 'clxm5h8tc0000z60usvmiwyep',
+      status: 'OPEN',
+      finalPrice: 64000,
+      recommendedPrice: 64000,
+      description: 'Buku nasi jerman',
+      seenCount: 0,
+      createdAt: '2024-06-19T18:12:01.594Z',
+      book: {
+        id: 'clxm5h8tc0001z60u0nqnk1s9',
+        title: 'Mein Kamf',
+        author: 'Adolf Hitler',
+        ISBN: '979-168-003-7',
+        publisher: 'NARASI',
+        publishYear: 2007,
+        language: 'Indonesia',
+        imageUrl:
+          'https://storage.googleapis.com/bucket-storage-request/images/post/clxm5h8tc0000z60usvmiwyep/clxm5h8tc0000z60usvmiwyep.jpg',
+        buyPrice: 75000,
+      },
+      user: {
+        id: 'clxlpe2t200007onksaw4yry0',
+        profile: {
+          id: 'clxlpe2t900027onkfvgxj25i',
+          name: 'Oki Firdaus Syah Putra',
+          avatarUrl:
+            'https://storage.googleapis.com/bucket-storage-request/images/user/clxlpe2t200007onksaw4yry0/clxlpe2t200007onksaw4yry0.png',
+          phoneNumber: '+6281234567890',
+          adminAreaLocality: 'Jawa Timur',
+          cityLocality: 'Kabupaten Bondowoso',
+          address: 'Bondowoso',
+        },
+      },
+    },
+    {
+      id: 'clxm5w1nn00009rk8ai9vm39x',
+      status: 'OPEN',
+      finalPrice: 63500,
+      recommendedPrice: 63500,
+      description: 'Buku nasi jerman',
+      seenCount: 0,
+      createdAt: '2024-06-19T18:23:32.195Z',
+      book: {
+        id: 'clxm5w1nn00019rk8h230rxr2',
+        title: 'Mein Kamf',
+        author: 'Adolf Hitler',
+        ISBN: '979-168-003-7',
+        publisher: 'NARASI',
+        publishYear: 2007,
+        language: 'Indonesia',
+        imageUrl:
+          'https://storage.googleapis.com/bucket-storage-request/images/post/clxm5w1nn00009rk8ai9vm39x/clxm5w1nn00009rk8ai9vm39x.jpg',
+        buyPrice: 75000,
+      },
+      user: {
+        id: 'clxlpe2t200007onksaw4yry0',
+        profile: {
+          id: 'clxlpe2t900027onkfvgxj25i',
+          name: 'Oki Firdaus Syah Putra',
+          avatarUrl:
+            'https://storage.googleapis.com/bucket-storage-request/images/user/clxlpe2t200007onksaw4yry0/clxlpe2t200007onksaw4yry0.png',
+          phoneNumber: '+6281234567890',
+          adminAreaLocality: 'Jawa Timur',
+          cityLocality: 'Kabupaten Bondowoso',
+          address: 'Bondowoso',
         },
       },
     },

@@ -6,6 +6,7 @@ export class SwaggerTag {
   static PROFILE_IMAGE = 'Profile Image';
   static BOOK_BY_OTHER_USER = 'Book By Other User';
   static BOOK_BY_POST_AUTHOR = 'Book By Post Author';
+  static PREDICT_BOOK = 'Predict Book';
 
   private static _authTagObject: TagObject[] = [
     {
@@ -29,6 +30,10 @@ export class SwaggerTag {
     {
       name: SwaggerTag.BOOK_BY_OTHER_USER,
       description: 'Post Book By Other User API',
+    },
+    {
+      name: SwaggerTag.PREDICT_BOOK,
+      description: 'Predict Book API',
     },
 
     {

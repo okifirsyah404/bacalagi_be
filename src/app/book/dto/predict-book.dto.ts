@@ -1,19 +1,10 @@
-import { PickType } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsNumber } from 'class-validator';
 import { BookDto } from 'src/data/dto/book.dto';
 import { Transformer } from 'src/utils/transform/transformer';
 
-export class PredictBookDto extends PickType(BookDto, [
-  'title',
-  'buyPrice',
-  //   'author',
-  //   'publisher',
-  //   'publishYear',
-  //   'ISBN',
-  //   'language',
-  //   'description',
-]) {
+export class PredictBookDto extends PickType(BookDto, ['buyPrice']) {
   /**
    * Buy price field.
    *
@@ -21,6 +12,10 @@ export class PredictBookDto extends PickType(BookDto, [
    * @decorator `@IsNumber()`
    *
    */
+  @ApiProperty({
+    type: 'string',
+    example: 120000,
+  })
   @Transform(Transformer.toNumber)
   @IsNotEmpty()
   @IsNumber()

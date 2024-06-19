@@ -79,17 +79,10 @@ export class UploadHandlerService {
       fs.mkdirSync(userDir);
     }
 
-    const newFilePath = path.join(userDir, userId);
-
-    if (!fs.existsSync(newFilePath)) {
-      fs.mkdirSync(newFilePath);
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    }
-
     const fileExtension = path.extname(filePath);
-    const newFile = path.join(newFilePath, `${userId}${fileExtension}`);
+    const newFile = path.join(userDir, `${userId}${fileExtension}`);
 
-    await this._unlinkPreviousImage(`user/${userId}`, newFile);
+    await this._unlinkPreviousImage(`user/`, newFile);
 
     await new Promise((resolve) => setTimeout(resolve, 100));
 
@@ -100,6 +93,8 @@ export class UploadHandlerService {
     this.logger.debug(`File copied: ${filePath}`);
 
     fs.unlinkSync(filePath);
+
+    await new Promise((resolve) => setTimeout(resolve, 200));
 
     return new Promise((resolve, reject) => {
       this.googleCloudStorageService.uploadUserImage(newFile).then(
@@ -130,17 +125,10 @@ export class UploadHandlerService {
       fs.mkdirSync(postDir);
     }
 
-    const newFilePath = path.join(postDir, postId);
-
-    if (!fs.existsSync(newFilePath)) {
-      fs.mkdirSync(newFilePath);
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    }
-
     const fileExtension = path.extname(filePath);
-    const newFile = path.join(newFilePath, `${postId}${fileExtension}`);
+    const newFile = path.join(postDir, `${postId}${fileExtension}`);
 
-    await this._unlinkPreviousImage(`post/${postId}`, newFile);
+    await this._unlinkPreviousImage(`post/`, newFile);
 
     await new Promise((resolve) => setTimeout(resolve, 100));
 
@@ -151,6 +139,8 @@ export class UploadHandlerService {
     this.logger.debug(`File copied: ${filePath}`);
 
     fs.unlinkSync(filePath);
+
+    await new Promise((resolve) => setTimeout(resolve, 200));
 
     return new Promise((resolve, reject) => {
       this.googleCloudStorageService.uploadPostImage(newFile).then(

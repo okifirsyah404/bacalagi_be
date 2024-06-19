@@ -33,7 +33,7 @@ import { ProfileExample } from '../swagger/profile.example';
 @ApiUnauthorizedResponse({
   description: 'Unauthorized user',
   schema: {
-    example: BaseResponse.unauthorized(null),
+    example: BaseResponse.unauthorized({}),
   },
 })
 @ApiInternalServerErrorResponse({
@@ -156,7 +156,7 @@ export class ProfileController {
   @ApiUnsupportedMediaTypeResponse({
     description: 'Unsupported media type. Only image files are allowed.',
     schema: {
-      example: BaseResponse.unsupportedMediaType(null),
+      example: BaseResponse.unsupportedMediaType({}),
     },
   })
   @UseInterceptors(

@@ -80,6 +80,9 @@ export class BookRepository {
       },
       skip: skip,
       take: limit,
+      orderBy: {
+        createdAt: 'desc',
+      },
       select: {
         ...DatabaseSelector.transactionPost,
         book: {
@@ -141,6 +144,9 @@ export class BookRepository {
       },
       skip: skip,
       take: limit,
+      orderBy: {
+        createdAt: 'desc',
+      },
       select: {
         ...DatabaseSelector.transactionPost,
         book: {
@@ -240,6 +246,9 @@ export class BookRepository {
       },
       skip: skip,
       take: limit,
+      orderBy: {
+        createdAt: 'desc',
+      },
       select: {
         ...DatabaseSelector.transactionPost,
         book: {

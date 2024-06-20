@@ -99,6 +99,8 @@ export class UploadHandlerService {
     return new Promise((resolve, reject) => {
       this.googleCloudStorageService.uploadUserImage(newFile).then(
         (uploadedFileUrl) => {
+          this.logger.debug(`File uploaded: ${uploadedFileUrl}`);
+          this.logger.debug(`Trying deleted: ${newFile}`);
           fs.unlinkSync(newFile);
           resolve(uploadedFileUrl);
         },
@@ -145,6 +147,8 @@ export class UploadHandlerService {
     return new Promise((resolve, reject) => {
       this.googleCloudStorageService.uploadPostImage(newFile).then(
         (uploadedFileUrl) => {
+          this.logger.debug(`File uploaded: ${uploadedFileUrl}`);
+          this.logger.debug(`Trying deleted: ${newFile}`);
           fs.unlinkSync(newFile);
           resolve(uploadedFileUrl);
         },

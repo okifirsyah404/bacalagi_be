@@ -130,7 +130,7 @@ export class BookController {
     },
   })
   @ApiTags(SwaggerTag.BOOK_BY_OTHER_USER)
-  @Get('search')
+  @Get('search/paging')
   async searchOpenSaleBook(
     @Req() req: any,
     @Query() query: SearchBookQueryParamDto,
@@ -147,6 +147,47 @@ export class BookController {
       },
       data: data.data,
     });
+  }
+
+  /**
+   * This HTTP GET request is used for searching open sale book without paging at book. The request requires a valid JWT token.
+   *
+   * Request
+   *
+   * The request query must contain the following fields:
+   *
+   * - search (string): The search query.
+   *
+   * Response
+   *
+   * Upon successful execution, the response will have a status code of 200. The response body will contain the following fields:
+   *
+   * - status (string): Indicates the status of the http method process.
+   * - statusCode (number): The status code of the response.
+   * - message (string): A message indicating the response status.
+   * - data (object): An array of open sale book data.
+   *
+   *
+   */
+  @ApiTags(SwaggerTag.BOOK_BY_OTHER_USER)
+  @ApiOkResponse({
+    description: 'Successfully search open sale book',
+    schema: {
+      example: BaseResponse.ok({
+        data: BookExample.openSaleBookExample,
+      }),
+    },
+  })
+  @Get('search')
+  async searchOpenSaleBookWithoutPaging(
+    @Req() req: any,
+    @Query('q') title: string,
+  ) {
+    const userId = req.payload.id;
+
+    const data = await this.service.searchOpenProduct(userId, title);
+
+    return BaseResponse.ok({ data });
   }
 
   /**
@@ -273,7 +314,7 @@ export class BookController {
       }),
     },
   })
-  @Get('author/post')
+  @Get('author/post/paging')
   async findAllByAuthor(
     @Req() req: any,
     @Query() query: FindManyBookQueryParamDto,
@@ -290,6 +331,38 @@ export class BookController {
       },
       data: data.data,
     });
+  }
+
+  /**
+   * This HTTP GET request is used for retrieving all book by author without paging at book. The request requires a valid JWT token.
+   *
+   * Response
+   *
+   * Upon successful execution, the response will have a status code of 200. The response body will contain the following fields:
+   *
+   * - status (string): Indicates the status of the http method process.
+   * - statusCode (number): The status code of the response.
+   * - message (string): A message indicating the response status.
+   * - data (object): An array of book data.
+   *
+   */
+  @ApiTags(SwaggerTag.BOOK_BY_POST_AUTHOR)
+  @ApiOkResponse({
+    description: 'Successfully get all book by author',
+    schema: {
+      example: BaseResponse.ok({
+        data: BookExample.openSaleBookExample,
+      }),
+    },
+  })
+  @Get('author/post/')
+  async findAllByAuthorWithoutPaging(@Req() req: any) {
+    const userId = req.payload.id;
+
+    const data =
+      await this.service.getPostsBookAsAuthorWithoutPagination(userId);
+
+    return BaseResponse.ok({ data });
   }
 
   /**
@@ -428,7 +501,7 @@ export class BookController {
       filter: ImageMultipart.imageValidationMultipartFilter,
     }),
   )
-  @Post('author/post')
+  @Post('author/post/paging')
   async create(
     @Req() req: any,
     @UploadedFile() file: MemoryStorageFile,

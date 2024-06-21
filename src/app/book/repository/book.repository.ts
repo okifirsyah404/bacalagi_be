@@ -169,6 +169,30 @@ export class BookRepository {
     };
   }
 
+  async searchProductByTitle(title: string) {
+    return await this.database.transactionPost.findMany({
+      where: {
+        status: TransactionStatus.OPEN,
+        book: {
+          title: {
+            contains: title,
+          },
+        },
+      },
+      select: {
+        ...DatabaseSelector.transactionPost,
+        book: {
+          select: {
+            ...DatabaseSelector.book,
+          },
+        },
+        user: {
+          select: DatabaseSelector.user,
+        },
+      },
+    });
+  }
+
   /**
    * Finds a post book by its ID.
    * @param id - The ID of the post book to find.
@@ -269,6 +293,33 @@ export class BookRepository {
       page: page,
       data: data,
     };
+  }
+
+  async findManyProductByAuthor(userId: string) {
+    const data = await this.database.transactionPost.findMany({
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+
+      orderBy: {
+        status: 'asc',
+      },
+      select: {
+        ...DatabaseSelector.transactionPost,
+        book: {
+          select: {
+            ...DatabaseSelector.book,
+          },
+        },
+        user: {
+          select: DatabaseSelector.user,
+        },
+      },
+    });
+
+    return data;
   }
 
   /**

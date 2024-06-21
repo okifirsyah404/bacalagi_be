@@ -123,6 +123,33 @@ export class BookService {
   }
 
   /**
+   * Searches for open products based on the given search query.
+   *
+   * @param userId - The ID of the user performing the search.
+   * @param searchQuery - The search query to match against product titles.
+   * @returns A Promise that resolves to the search results.
+   * @throws InternalServerErrorException if there is an error retrieving the user or searching for products.
+   * @throws UnauthorizedException if the user is not found.
+   */
+  async searchOpenProduct(userId: string, searchQuery: string) {
+    const user = await this.repository.getUserById(userId).catch((error) => {
+      throw new InternalServerErrorException(error);
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    const data = await this.repository
+      .searchProductByTitle(searchQuery)
+      .catch((error) => {
+        throw new InternalServerErrorException(error);
+      });
+
+    return data;
+  }
+
+  /**
   * Retrieves a post book by its ID for a specific user.
   * 
   * @param userId - The ID of the user.
@@ -192,6 +219,24 @@ export class BookService {
         page: dto.page,
         size: dto.size,
       })
+      .catch((error) => {
+        throw new InternalServerErrorException(error);
+      });
+
+    return data;
+  }
+
+  async getPostsBookAsAuthorWithoutPagination(userId: string) {
+    const user = await this.repository.getUserById(userId).catch((error) => {
+      throw new InternalServerErrorException(error);
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    const data = await this.repository
+      .findManyProductByAuthor(userId)
       .catch((error) => {
         throw new InternalServerErrorException(error);
       });

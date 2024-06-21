@@ -355,7 +355,7 @@ export class BookController {
       }),
     },
   })
-  @Get('author/post/')
+  @Get('author/post')
   async findAllByAuthorWithoutPaging(@Req() req: any) {
     const userId = req.payload.id;
 
@@ -501,7 +501,7 @@ export class BookController {
       filter: ImageMultipart.imageValidationMultipartFilter,
     }),
   )
-  @Post('author/post/paging')
+  @Post('author/post')
   async create(
     @Req() req: any,
     @UploadedFile() file: MemoryStorageFile,
@@ -542,7 +542,7 @@ export class BookController {
     type: CreateBookExampleDto,
   })
   @ApiOkResponse({
-    description: 'Successfully create book',
+    description: 'Successfully edit book',
     schema: {
       example: BaseResponse.ok({
         data: BookExample.productExample,
